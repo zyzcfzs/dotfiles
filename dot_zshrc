@@ -124,6 +124,13 @@ function take(){
       return 1
   fi
 }
+function edit(){
+   if [[ $# -eq 1  && -a $1 ]]; then
+     $EDITOR $1 && chezmoi add $1
+   else
+     return 1
+   fi 
+}
 export VI_MODE_SET_CURSOR=true
 export EDITOR='nvim'
 alias zmisc="autoload -Uz zed tetriscurses zmv zargs && unalias zmisc"
