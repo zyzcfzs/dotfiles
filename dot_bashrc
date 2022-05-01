@@ -1,0 +1,2 @@
+export PS2=">"
+eval "$(starship init bash)"
