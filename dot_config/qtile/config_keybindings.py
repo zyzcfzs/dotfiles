@@ -23,7 +23,7 @@ from os.path import expanduser
 HOME = expanduser("~")
 
 # Define constants here
-TERMINAL = "alacritty -e tmux"
+TERMINAL = "alacritty -e tmux attach-session"
 
 
 # Basic window manager movements

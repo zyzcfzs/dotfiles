@@ -1,0 +1,98 @@
+format = """
+[](#FF8C32)\
+$username\
+$hostname\
+[](bg:#6BCB77 fg:#FF8C32)\
+$directory\
+[](fg:#6BCB77 bg:#FF6B6B)\
+$memory_usage\
+[](fg:#FF6B6B bg:#4D96FF)\
+$time\
+[](fg:#4D96FF bg:#726A95)\
+$git_branch\
+$git_status\
+$cmd_duration\
+$shell\
+$character\
+[ ](fg:#726A95)\
+"""
+
+# Disable the blank line at the start of the prompt
+# add_newline = false
+
+# You can also replace your username with a neat symbol like  to save some space
+[username]
+show_always = true
+style_user = "bg:#FF8C32"
+style_root = "bg:#FF8C32"
+format = '[$user]($style)'
+[hostname]
+ssh_only = false
+format = "[@$hostname](bg:#FF8C32)"
+trim_at = ".companyname.com"
+disabled = false
+[directory]
+style = "bg:#6BCB77"
+format = "[$path]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = " "
+[cmd_duration]
+min_time = 1_000
+format = "[ $duration ](bg:#726A95)"
+min_time_to_notify = 60_000
+show_notifications = true
+notification_timeout = 15_000
+# Here is how you can shorten some long paths by text replacement
+# similar to mapped_locations in Oh My Posh:
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[git_branch]
+symbol = ""
+style = "bg:#726A95"
+format = '[[ $symbol $branch ](bg:#726A95)]($style)'
+
+[git_status]
+style = "bg:#726A95"
+format = '[[($all_status$ahead_behind )](bg:#726A95)]($style)'
+
+[memory_usage]
+disabled = false
+threshold = -1
+format = "[${ram} ${ram_pct}]($style)"
+style = "bg:#FF6B6B fg:#F4FCD9"
+
+[localip]
+ssh_only = false
+format = "[$localipv4 ](bg:#4D96FF)"
+disabled = false
+
+[shell]
+bash_indicator = "Bash"
+elvish_indicator = "Elvish"
+cmd_indicator = "Cmd"
+ion_indicator = "Ion"
+tcsh_indicator = "Tcsh"
+xonsh_indicator = "Xonsh"
+nu_indicator = "Nushell"
+unknown_indicator = " "
+fish_indicator = ""
+powershell_indicator = "_"
+format = "[$indicator]($style)"
+style = "bg:#726A95"
+disabled = false
+
+[time]
+disabled = false
+time_format = "%T" # Hour:Minute Format
+style = "bg:#4D96FF"
+format = '[[🕙 $time](bg:#4D96EF)]($style)'
+
+[character]
+success_symbol = "[  ](bg:#726A95 fg:#28DF99)"
+format = "$symbol"
+error_symbol = "[  ](bg:#726A95 fg:#FF0000)"
