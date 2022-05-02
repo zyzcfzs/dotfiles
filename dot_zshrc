@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export FZF_BASE="/usr/bin/fzf"
+export FZF_BASE="$(which fzf)"
 eval "$(zoxide init zsh)"
 ZSH_WEB_SEARCH_ENGINES=(
 explain "https://explainshell.com/explain?cmd="
@@ -13,7 +13,7 @@ archwiki "https://wiki.archlinux.org/title/"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="random"
-
+# use vim mode
 bindkey -v
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -30,10 +30,10 @@ CASE_SENSITIVE="true"
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+# zstyle ':omz:update' frequency 21
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -44,7 +44,7 @@ CASE_SENSITIVE="true"
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -90,8 +90,8 @@ web-search
 )
 
 source $ZSH/oh-my-zsh.sh
-# antigen
-source /usr/share/zsh/share/antigen.zsh
+# load antigen
+source ~/.config/antigen.zsh
 antigen bundle chrissicool/zsh-256color
 antigen bundle Aloxaf/fzf-tab
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -139,7 +139,6 @@ alias c="clear"
 alias en="LC_ALL=C"
 alias ls="exa --color=always"
 alias la="ls -lah --icons"
-alias edit="chezmoi edit"
 alias h="history | fzf --tac | sed -E 's/\s+[0-9]*\s+(.*)/\1/' | tee /dev/tty | xclip -selection clipboard"
 autoload -Uz zcalc 
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
