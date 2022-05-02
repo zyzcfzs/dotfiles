@@ -47,29 +47,7 @@ antigen bundle zsh-users/zsh-completions
 antigen apply
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-function take(){
-  if [[ $# -eq 1 ]]; then
-      if [[ ! -d $1 && ! -f $1 ]]; then
-	    mkdir -p $1 && cd $1
-      elif [[ -d $1 ]]; then
-	    cd $1
-      elif [[ -f $1 ]]; then
-	    xdg-open $1
-      else 
-	    echo "Cannot process further"
-	    return 1
-      fi  
-  else 
-      echo "Can Only accept One argument"
-      return 1
-  fi
-}
 function edit(){
    if [[ $# -eq 1  && -a $1 ]]; then
      $EDITOR $1 && chezmoi add $1
@@ -88,14 +66,6 @@ alias la="ls -lah --icons"
 alias che="chezmoi"
 alias h="history | fzf --tac | sed -E 's/\s+[0-9]*\s+(.*)/\1/' | tee /dev/tty | xclip -selection clipboard"
 autoload -Uz zcalc 
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-# zstyle
 zstyle ':fzf-tab:*' fzf-bindings 'ctrl-y:select' 'ctrl-a:toggle-all'
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
