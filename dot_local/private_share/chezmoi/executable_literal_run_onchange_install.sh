@@ -6,7 +6,6 @@ function common_set_up() {
     fi
     if [[ ! -d ~/.oh-my-zsh ]]; then
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-        source ~/.zshrc
     fi
     if [[ ! -d ~/.tmux/plugins/tpm ]]; then
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
