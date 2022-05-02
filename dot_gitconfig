@@ -1,0 +1,26 @@
+[user]
+	name = zyzcfzs
+	email = zyzcfzs@163.com 
+[alias]
+    lg = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	unstage = restore --staged
+	back = reset --hard HEAD^
+	st = status -sb
+	remotes = remote -v
+	branches = branch -v -a
+	ac = !git add -A && git commit
+	tags = tag -l
+[color]
+	ui = 1
+[init]
+	defaultBranch = main
+[core]
+	editor = code
+[help]
+    autocorrect = 1
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
