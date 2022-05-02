@@ -18,9 +18,7 @@ function common_set_up() {
     fi
 }
 if [[ "$(which pacman)" =~ ^.*pacman$ ]]; then 
-    sudo pacman -Syyu && sudo pacman --needed -S xclip nodejs npm alacritty neovim curl wget aria2 tmux zsh ripgrep bat zoxide fzf exa picom nitrogen qtile
-    common_set_up
+    sudo pacman -Syyu && sudo pacman --needed -S xclip nodejs npm alacritty neovim curl wget aria2 tmux zsh ripgrep bat zoxide fzf exa picom nitrogen qtile && common_set_up
 elif [[ "$(which apt)" =~ ^.*apt$ ]]; then 
-    sudo apt update && sudo apt dist-upgrade -y && apt install -y xclip nodejs npm zsh tmux curl wget aria2 fzf bat ripgrep neovim tmux exa picom nitrogen zoxide
-    common_set_up
+    sudo apt update && sudo apt dist-upgrade -y && apt install -y xclip nodejs npm zsh tmux curl wget aria2 fzf bat ripgrep neovim tmux exa picom nitrogen zoxide && common_set_up
 fi
