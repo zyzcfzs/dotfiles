@@ -71,10 +71,14 @@ autoload -Uz zcalc
 zstyle ':fzf-tab:*' fzf-bindings 'ctrl-y:select' 'ctrl-a:toggle-all'
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
+zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:man:*' fzf-preview 'man $word'
-zstyle ':fzf-tab:complete:*:*' fzf-preview 'if [[ -d $realpath ]]; then exa -alF1 -g --color-scale --color=always --icons --time-style long-iso --git --extended $realpath; elif [[ -a $realpath && $(file -i $realpath | grep asc) ]]; then bat --color=always $realpath; elif [[ -a $realpath && -n $(file -i $realpath | grep exe) ]];then hexdump -n 256 -C $realpath; else echo Description:;echo $desc | fold -w 80; fi'
-zstyle ':fzf-tab:complete:*:options' fzf-preview ''
-zstyle ':fzf-tab:complete:git:*' fzf-preview ''
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
+	'git diff $word'
+zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
+	'git log --color=always $word'
+zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
+	'git help $word | bat -plman --color=always'
 # prevent emotty theme from loading
 if [ "$RANDOM_THEME" = "emotty" ]; then source $ZSH/themes/random.zsh-theme; fi
 bindkey -s '^[^l' 'ls^M'
