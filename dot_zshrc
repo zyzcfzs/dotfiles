@@ -62,6 +62,7 @@ alias clip="xclip -selection clipboard"
 alias c="clear"
 alias en="LC_ALL=C"
 alias ls="exa --color=always"
+alias ll="ls -lh --icons"
 alias la="ls -lah --icons"
 alias lar="ls -lRah --icons"
 alias ltr="ls -lTah --icons"
@@ -73,6 +74,7 @@ zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:man:*' fzf-preview 'man $word'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -alF1 -g --color-scale --color=always --icons --time-style long-iso --git --extended $realpath'
 zstyle ':fzf-tab:complete:exa:*' fzf-preview 'if [[ -d $realpath ]]; then exa -alF1 -g --color-scale --color=always --icons --time-style long-iso --git --extended $realpath; elif [[ -a $realpath && $(file -i $realpath | grep asc) ]]; then bat --color=always $realpath; elif [[ -a $realpath && -n $(file -i $realpath | grep exe) ]];then hexdump -n 256 -C $realpath; else echo Description:;echo $desc | fold -w 80; fi'
 zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
 	'git diff $word'
@@ -82,6 +84,59 @@ zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
 	'git help $word | bat -plman --color=always'
 # prevent emotty theme from loading
 if [ "$RANDOM_THEME" = "emotty" ]; then source $ZSH/themes/random.zsh-theme; fi
-bindkey -s '^[^l' 'la ^I^M'
-bindkey -s '^[[1;6D' 'cd ..^M'
-bindkey -s '^[[1;6C' 'cd ^I^M' 
+# prepend sudo to the command to gain super user access
+function _prepend-sudo {
+  if [[ $BUFFER != 'sudo'* ]]; then
+    BUFFER="sudo $BUFFER"
+    CURSOR+=5
+  fi
+}
+zle -N _prepend-sudo
+bindkey -M vicmd 's' _prepend-sudo
+bindkey -M viins '\es' _prepend-sudo
+# edit the current shell command with default editor
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd 'e' edit-command-line
+bindkey -M viins '^e' edit-command-line
+# replace strings occured in the current command
+autoload -U replace-string
+zle -N replace-string
+bindkey -M vicmd '\er' replace-string
+function _list-all-dir (){
+    setopt globdots
+    BUFFER="la "
+    CURSOR+=3
+    zle fzf-tab-complete
+    zle accept-line
+    unsetopt globdots
+}
+function _list-dir (){
+    BUFFER="ll "
+    CURSOR+=3
+    zle fzf-tab-complete
+    zle accept-line
+}
+function _prev-dir (){
+    cd ..
+    zle reset-prompt
+}
+function _next-dir (){
+    BUFFER="cd "
+    CURSOR+=3
+    zle fzf-tab-complete
+    if [[ $BUFFER == 'cd ' ]]; then
+        BUFFER=''
+    else
+        zle accept-line
+        zle reset-prompt
+    fi
+}
+zle -N _prev-dir
+zle -N _next-dir
+zle -N _list-all-dir
+zle -N _list-dir
+bindkey -M viins '^[[1;5D' _prev-dir
+bindkey -M viins '^[[1;5C' _next-dir
+bindkey -M viins '^[A' _list-all-dir
+bindkey -M viins '^[L' _list-dir

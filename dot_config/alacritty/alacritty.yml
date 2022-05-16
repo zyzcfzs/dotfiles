@@ -769,7 +769,7 @@ key_bindings:
   - { key: N,              mods: Control|Shift, mode: ~Vi,        action: CreateNewWindow  }
   - { key: Q,              mods: Control|Shift, mode: ~Vi,              action: Quit             }
   - { key: C,              mods: Control|Shift,                   action: Copy             }
-  - { key: F,              mods: Control, mode: ~Search,          action: SearchForward    }
+  - { key: F,              mods: Control,       mode: ~Search,          action: SearchForward    }
   - { key: F,              mods: Control|Shift, mode: ~Search,    action: SearchBackward   }
   - { key: C,              mods: Control|Shift, mode: Vi|~Search, action: ClearSelection   }
   - { key: Key0,           mods: Control,                         action: ResetFontSize    }

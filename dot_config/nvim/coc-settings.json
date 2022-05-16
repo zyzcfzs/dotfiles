@@ -1,2 +1,8 @@
-{}
+{
+    "emmet.excludeLanguages" : [],
+    "explorer.icon.enableNerdfont":true,
+    "explorer.width": 25,
+    "snippets.ultisnips.enable": false,
+    "snippets.userSnippetsDirectory": "~/.config/nvim/snippets"
+}
 
