@@ -19,6 +19,8 @@ if !exists('g:vscode')
     let g:vim_markdown_frontmatter = 1
     let g:vim_markdown_strikethrough = 1
     let g:vim_markdown_no_extensions_in_markdown = 1
+    let g:mkdp_auto_start = 1
+    let g:mkdp_port = '54730'
 endif
 let g:qs_buftype_blacklist = ['terminal', 'nofile']
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
