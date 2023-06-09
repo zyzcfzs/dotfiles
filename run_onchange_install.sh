@@ -15,12 +15,9 @@ function common_set_up() {
     curl https://gist.githubusercontent.com/zyzcfzs/33e7940448456aafc8c7973fdb886a2c/raw/d25cab7f91e655c8a52fd065eb8f38d37c65b349/.vimrc > ~/.vimrc
 }
 if [[ "$(which pacman >/dev/null; echo -n $?)" == "0" ]]; then 
-    sudo pacman -Syyyu && sudo pacman --needed -S fd xclip nodejs npm alacritty curl wget aria2 tmux zsh ripgrep bat zoxide fzf exa yarn
+    sudo pacman -Syyyu && sudo pacman --needed -S fd xclip alacritty curl wget aria2 tmux zsh ripgrep bat zoxide fzf exa yarn
 elif [[ "$(which apt >/dev/null; echo -n $?)" == "0" ]]; then 
-    sudo apt update && sudo apt dist-upgrade -y && sudo apt install -y fd-find xclip nodejs npm zsh tmux curl wget aria2 fzf bat ripgrep tmux exa zoxide
-    if [[ "$(which yarn >/dev/null; echo -n $?)" != "0" ]]; then 
-        sudo npm install -g yarn
-    fi
+    sudo apt update && sudo apt dist-upgrade -y && sudo apt install -y fd-find xclip zsh tmux curl wget aria2 fzf bat ripgrep tmux exa zoxide
     if [[ "$(which batcat >/dev/null; echo -n $?)" == "0" ]]; then 
         sudo mv $(which batcat) $(dirname $(which batcat))"/bat"
     fi
